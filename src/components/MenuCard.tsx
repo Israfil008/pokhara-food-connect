@@ -28,9 +28,19 @@ const MenuCard = ({ item }: { item: MenuItem }) => {
         <p className="text-muted-foreground text-sm mt-1 line-clamp-2">{item.description}</p>
         <div className="flex items-center justify-between mt-4">
           <span className="font-heading font-bold text-primary text-lg">NPR {item.price}</span>
-          <Button size="sm" onClick={handleAdd} className="gap-1">
-            <Plus className="h-4 w-4" /> Add
-          </Button>
+         <Button
+onClick={() =>
+createOrder({
+name: "Customer",
+phone: "9800000000",
+items: item.name,
+total: item.price,
+status: "pending"
+})
+}
+>
+Order Now
+</Button>
         </div>
       </div>
     </div>
