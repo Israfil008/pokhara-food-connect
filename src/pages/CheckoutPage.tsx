@@ -8,6 +8,10 @@ import { CheckCircle } from "lucide-react";
 const CheckoutPage = () => {
   const { items, total, appliedDiscount, clearCart } = useCart();
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const { name, phone, address } = location.state || {};
+
   const [stage, setStage] = useState<"paying" | "success">("paying");
 
   const [orderId] = useState(`ISRO-${Date.now().toString(36).toUpperCase()}`);
