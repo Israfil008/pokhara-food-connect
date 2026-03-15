@@ -13,9 +13,6 @@ const { name, phone, address } = location.state || {};
   const { items, updateQuantity, removeItem, couponCode, setCouponCode, applyCoupon, appliedDiscount, subtotal, total } = useCart();
   const navigate = useNavigate();
   const [deliveryType, setDeliveryType] = useState<"delivery" | "pickup">("delivery");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
 
   const handleApplyCoupon = () => {
     if (applyCoupon()) toast.success(`Coupon applied! ${appliedDiscount || couponCode}% off`);
