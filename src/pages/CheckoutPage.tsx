@@ -14,7 +14,7 @@ const CheckoutPage = () => {
     if (items.length === 0 && stage === "paying") navigate("/cart");
   }, [items, stage, navigate]);
 
-const handleMockPayment = async () => {
+const handleMockPayment = () => {
 
   const orderData = {
     name: customerName,
@@ -24,15 +24,20 @@ const handleMockPayment = async () => {
     quantity: items.map(i => i.quantity).join(", ")
   };
 
-  await fetch("https://script.google.com/macros/s/AKfycbyOEox7TOjmcLXFxYKKWHtJDbo3gUXbD3Epe0Kz1UfOWEWJonLHPIyDMRttOnSSsIzEHA/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbyOEox7TOjmcLXFxYKKWHtJDbo3gUXbD3Epe0Kz1UfOWEWJonLHPIyDMRttOnSSsIzEHA/exec", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(orderData)
-  });
+  })
+  .then(() => console.log("Order sent"))
+  .catch(err => console.log("Error sending order:", err));
 
-  setTimeout(() => setStage("success"), 1500);
+  // Move to success page regardless
+  setTimeout(() => {
+    setStage("success");
+  }, 1500);
 };
 
   if (stage === "success") {
