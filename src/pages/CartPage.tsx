@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
 const CartPage = () => {
+  const location = useLocation();
+const { name, phone, address } = location.state || {};
   const { items, updateQuantity, removeItem, couponCode, setCouponCode, applyCoupon, appliedDiscount, subtotal, total } = useCart();
   const navigate = useNavigate();
   const [deliveryType, setDeliveryType] = useState<"delivery" | "pickup">("delivery");
@@ -23,7 +26,13 @@ const CartPage = () => {
     if (!name || !phone) { toast.error("Please fill in your name and phone number"); return; }
     if (deliveryType === "delivery" && !address) { toast.error("Please enter delivery address"); return; }
     if (items.length === 0) { toast.error("Your cart is empty"); return; }
-    navigate("/checkout");
+    navigate("/checkout", {
+  state: {
+    name,
+    phone,
+    address
+  }
+});
   };
 
   if (items.length === 0) {
