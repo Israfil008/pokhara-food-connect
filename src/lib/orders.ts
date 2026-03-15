@@ -1,8 +1,6 @@
-import { supabase } from "./supabase";
-
 async function placeOrder(order) {
 
-await fetch("https://script.google.com/macros/s/AKfycbzxBwBXfKWPsnPh-xyKF-v0HG8wbih51tCiGNIJ5emz0UReFBWZA_WJa-ckiBNwFN8/exec", {
+await fetch("https://script.google.com/macros/s/AKfycbyp8CzuywkNEc0HItkQ2zyslqz53MChI1HWiACfh1cAJfyqa0VqoeOedlz03e8xJ-9K/exec", {
 method: "POST",
 body: JSON.stringify(order)
 });
