@@ -21,11 +21,14 @@ const handleMockPayment = async () => {
   try {
     await fetch("https://script.google.com/macros/s/AKfycbyOEox7TOjmcLXFxYKKWHtJDbo3gUXbD3Epe0Kz1UfOWEWJonLHPIyDMRttOnSSsIzEHA/exec", {
       method: "POST",
-      body: JSON.stringify({
-        items,
-        total,
-        time: new Date().toISOString()
-      })
+body: JSON.stringify({
+  name: name,
+  phone: phone,
+  address: address,
+  item: items.map(i => i.name).join(", "),
+  quantity: items.map(i => i.quantity).join(", "),
+  time: new Date().toISOString()
+})
     });
   } catch (err) {
     console.log("Order send failed", err);
