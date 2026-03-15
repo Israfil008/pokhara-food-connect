@@ -15,19 +15,18 @@ const CheckoutPage = () => {
   }, [items, stage, navigate]);
 
 const handleMockPayment = async () => {
-
-  const orderData = {
-    name: customerName,
-    phone: customerPhone,
-    address: customerAddress,
-    item: items.map(i => i.name).join(", "),
-    quantity: items.map(i => i.quantity).join(", ")
-  };
-
-  await fetch("https://script.google.com/macros/s/AKfycbzBYXXbde7yyEA8KqM6l7yDsihxDoBhcjk_TKHmEU2UUvaqG24WDJy6SWLT2LwrjxlXDg/exec", {
-    method: "POST",
-    body: JSON.stringify(orderData)
-  });
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbzBYXXbde7yyEA8KqM6l7yDsihxDoBhcjk_TKHmEU2UUvaqG24WDJy6SWLT2LwrjxlXDg/exec", {
+      method: "POST",
+      body: JSON.stringify({
+        items,
+        total,
+        time: new Date().toISOString()
+      })
+    });
+  } catch (err) {
+    console.log("Order send failed", err);
+  }
 
   setTimeout(() => setStage("success"), 1500);
 };
