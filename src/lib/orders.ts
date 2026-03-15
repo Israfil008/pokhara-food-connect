@@ -1,23 +1,12 @@
 import { supabase } from "./supabase";
 
-export async function createOrder(order: any) {
-  const { data, error } = await supabase
-    .from("orders")
-    .insert([order])
-    .select();
+async function placeOrder(order) {
 
-  if (error) {
-    console.error("Supabase error:", error);
-    alert("Order failed");
-    return;
-  }
+await fetch("https://script.google.com/macros/s/AKfycbzxBwBXfKWPsnPh-xyKF-v0HG8wbih51tCiGNIJ5emz0UReFBWZA_WJa-ckiBNwFN8/exec", {
+method: "POST",
+body: JSON.stringify(order)
+});
 
-  if (!data || data.length === 0) {
-    console.error("Insert returned no rows");
-    alert("Order not saved");
-    return;
-  }
+alert("Order sent!");
 
-  console.log("Order inserted:", data);
-  alert("Order placed successfully!");
 }
