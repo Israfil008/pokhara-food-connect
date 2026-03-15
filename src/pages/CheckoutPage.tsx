@@ -8,8 +8,11 @@ const CheckoutPage = () => {
   const { items, total, appliedDiscount, clearCart } = useCart();
   const navigate = useNavigate();
   const [stage, setStage] = useState<"paying" | "success">("paying");
-  const [orderId] = useState(`ISRO-${Date.now().toString(36).toUpperCase()}`);
 
+  const [orderId] = useState(`ISRO-${Date.now().toString(36).toUpperCase()}`);
+const [name, setName] = useState("");
+const [phone, setPhone] = useState("");
+const [address, setAddress] = useState("");
   useEffect(() => {
     if (items.length === 0 && stage === "paying") navigate("/cart");
   }, [items, stage, navigate]);
