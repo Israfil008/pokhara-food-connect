@@ -16,7 +16,7 @@ const CheckoutPage = () => {
 
 const handleMockPayment = async () => {
   try {
-    await fetch("YOUR_SCRIPT_URL", {
+    await fetch("https://script.google.com/macros/s/AKfycbyOEox7TOjmcLXFxYKKWHtJDbo3gUXbD3Epe0Kz1UfOWEWJonLHPIyDMRttOnSSsIzEHA/exec", {
       method: "POST",
       body: JSON.stringify({
         items,
